@@ -1,12 +1,133 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
 	<meta charset="UTF-8">
-	<title>Планеты</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Лабораторная работа</title>
+	<style>
+        header {
+            font-family: serif;
+            color: darkblue;
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 50%;
+            margin: 0 auto;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: left;
+        }
+
+        input[type="text"], select {
+            margin: 5%;
+            padding: 5px;
+        }
+
+        input:focus, select:focus {
+            border-color: green;
+        }
+
+        input[type="submit"] {
+            background-color: lightblue;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: deepskyblue;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        form {
+            color: black;
+        }
+
+        table > tbody > tr > td {
+            background-color: #f9f9f9;
+        }
+
+        .image-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .checkbox-group {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+	</style>
 </head>
-<body><h1>privetik danechka</h1>
-<h2>kak ddddddddela u tebya</h2>
-<button type="submit">normi0</button>
-<button type="submit">ya na physics</button>
+<body>
+<header>
+	<p>Чумаченко Даниил Олегович</p>
+	<p>P3215</p>
+	<p>409853</p>
+</header>
+
+<table>
+	<tr>
+		<th>Поле</th>
+		<th>Значение</th>
+	</tr>
+	<tr>
+		<td>X</td>
+		<td>
+			<label for="x"></label><select id="x" name="x">
+			<option value="-3">-3</option>
+			<option value="-2">-2</option>
+			<option value="-1">-1</option>
+			<option value="0">0</option>
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+			<option value="5">5</option>
+		</select>
+		</td>
+	</tr>
+	<tr>
+		<td>Y</td>
+		<td><label for="y"></label><input type="text" id="y" name="y" placeholder="значение от -3 до 5"></td>
+	</tr>
+	<tr>
+		<td>R</td>
+		<td>
+			<div class="checkbox-group">
+				<label><input type="checkbox" name="radius" value="1" id="r1">1</label>
+				<label><input type="checkbox" name="radius" value="2" id="r2">2</label>
+				<label><input type="checkbox" name="radius" value="3" id="r3">3 </label>
+				<label><input type="checkbox" name="radius" value="4" id="r4">4</label>
+				<label><input type="checkbox" name="radius" value="5" id="r5">5</label>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<input type="submit" value="Отправить" onclick="return null">
+		</td>
+	</tr>
+</table>
+
+<div class="image-container">
+	<h3>График области</h3>
+	<img src="graph.png" alt="График области"/>
+</div>
+
+<script src="index.js"></script>
 </body>
 </html>

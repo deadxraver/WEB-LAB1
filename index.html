@@ -1,10 +1,45 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+	<script src="libs/jquery.min.js"></script>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Лабораторная работа</title>
 	<style>
+        #buttob {
+            animation-name: grow;
+            animation-duration: 2s;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+
+        @keyframes grow {
+            0% {
+                transform: scaleX(1.1);
+            }
+            50% {
+                transform: scaleX(5.8);
+                background: darkturquoise;
+            }
+        }
+
+        #buttob:hover {
+            animation-play-state: paused;
+        }
+
+        #buttob {
+            width: 200px;
+            height: 80px;
+            background: lightseagreen;
+            position: relative;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        label {
+            display: block;
+        }
+
         header {
             font-family: serif;
             color: darkblue;
@@ -70,6 +105,7 @@
             justify-content: center;
             gap: 10px;
         }
+
 	</style>
 </head>
 <body>
@@ -117,8 +153,8 @@
 		</td>
 	</tr>
 	<tr>
-		<td colspan="2">
-			<input type="submit" value="Отправить" onclick="return null">
+		<td colspan="2" style="text-align: center">
+			<input id="buttob" type="submit" value="Отправить" src="img.png" onclick="return sendForm()">
 		</td>
 	</tr>
 </table>
@@ -127,6 +163,22 @@
 	<h3>График области</h3>
 	<img src="graph.png" alt="График области"/>
 </div>
+
+<table class="results-table" id="resultsTable">
+	<thead>
+	<tr>
+		<th>X</th>
+		<th>Y</th>
+		<th>R</th>
+		<th>Попадание</th>
+		<th>Текущее время</th>
+		<th>Время выполнения</th>
+	</tr>
+	</thead>
+	<tbody id="resultsBody">
+	<!-- Результаты будут добавляться сюда -->
+	</tbody>
+</table>
 
 <script src="index.js"></script>
 </body>

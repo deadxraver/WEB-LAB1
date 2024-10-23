@@ -154,14 +154,14 @@
 	</tr>
 	<tr>
 		<td colspan="2" style="text-align: center">
-			<input id="buttob" type="submit" value="Отправить" src="img.png" onclick="return sendForm()">
+			<input id="buttob" type="submit" value="Отправить" src="img.png">
 		</td>
 	</tr>
 </table>
 
 <div class="image-container">
 	<h3>График области</h3>
-	<img src="graph.png" alt="График области"/>
+	<canvas id="canvas" width="450px" height="450px"></canvas>
 </div>
 
 <table class="results-table" id="resultsTable">
@@ -176,10 +176,12 @@
 	</tr>
 	</thead>
 	<tbody id="resultsBody">
-	<!-- Результаты будут добавляться сюда -->
+
 	</tbody>
 </table>
 
 <script src="index.js"></script>
+<script src="CanvasDrawer.js"></script>
+<script src="libs/jquery.min.js"></script>
 </body>
 </html>

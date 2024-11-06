@@ -1,6 +1,6 @@
 let x = -3;
 let y = null;
-let r = null;
+let rList = [];
 let buttob;
 let canvasDrawer;
 
@@ -16,28 +16,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	const xSelect = document.getElementById("x");
 	const yText = document.getElementById("y");
-	const rList = [];
 
-	for (let i = 1; i < 6; i++) {
-		rList.push(document.getElementById("r".concat(i.toString())));
-		let fun = () => {
-			for (let j = 0; j < rList.length; j++) {
-				if (j !== i - 1) {
-					rList[j].checked = false;
-				}
+	let fun = () => {
+		rList = [];
+		for (let i = 1; i < 6; i++) {
+			if (document.getElementById("r".concat(i.toString())).checked) {
+				rList.push(i);
 			}
-			r = rList[i - 1].checked ? i : null;
-			canvasDrawer.redrawAll(r)
-			if (checkNum(x) && checkNum(parseFloat(y)) && checkNum(r)) {
-				buttob.style.visibility = 'visible';
-			} else buttob.style.visibility = 'hidden';
 		}
-		rList[i - 1].addEventListener("click", fun);
+		if (rList) canvasDrawer.redrawAll(rList[rList.length - 1]);
+		if (checkNum(x) && checkNum(parseFloat(y)) && rList.length) {
+			buttob.style.visibility = 'visible';
+		} else buttob.style.visibility = 'hidden';
+	}
+	for (let i = 1; i < 6; i++) {
+		document.getElementById("r".concat(i.toString())).addEventListener("click", fun);
 	}
 
 	xSelect.addEventListener("change", function (event) {
 		x = event.target.value;
-		if (checkNum(x) && checkNum(parseFloat(y)) && checkNum(r)) {
+		if (checkNum(x) && checkNum(parseFloat(y)) && rList.length) {
 			buttob.style.visibility = 'visible';
 		} else buttob.style.visibility = 'hidden';
 	});
@@ -63,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			y = y.substring(1);
 		}
 		yText.value = y;
-		if (checkNum(x) && checkNum(parseFloat(y)) && checkNum(r)) {
+		if (checkNum(x) && checkNum(parseFloat(y)) && rList.length) {
 			buttob.style.visibility = 'visible';
 		} else buttob.style.visibility = 'hidden';
 	});
@@ -78,22 +76,24 @@ document.addEventListener("DOMContentLoaded", () => {
 	}
 
 	function sendForm() {
-		$.ajax({
-			type: "GET",
-			url: "http://localhost:24928/fcgi-bin/server.jar",
-			data: {x: x, y: y, r: r},
-			success: (msg) => {
-				processSuccess($.parseJSON(msg));
-			},
-			error: (msg) => {
-				processError();
-			}
+		rList.forEach(r => {
+			$.ajax({
+				type: "GET",
+				url: "http://localhost:24928/fcgi-bin/server.jar",
+				data: {x: x, y: y, r: r},
+				success: (msg) => {
+					processSuccess($.parseJSON(msg));
+				},
+				error: (msg) => {
+					processError();
+				}
+			});
 		});
 	}
 });
 
 function validate() {
-	return checkNum(x) && checkNum(y) && checkNum(r) && (x >= -3 && x <= 5) && (y >= -3 && y <= 5) && (r >= 1 && r <= 5);
+	return checkNum(x) && checkNum(y) && (x >= -3 && x <= 5) && (y >= -3 && y <= 5) && rList;
 }
 
 function processSuccess(msg) {
